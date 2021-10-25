@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.fabricmc.mod.mixin",
+  "package": "com.ismith.kanismod.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "Mixin"
