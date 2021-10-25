@@ -3,14 +3,13 @@
   "id": "modid",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Kanis",
+  "description": "The Minecraft Palamute Mod",
   "authors": [
-    "Me!"
+    "TrianReallyHard"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/IanSmith1337/Kanis"
   },
 
   "license": "CC0-1.0",
@@ -19,11 +18,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "com.ismith.kanismod.ModManager"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "kanis.mixins.json"
   ],
 
   "depends": {
@@ -31,8 +30,5 @@
     "fabric": "*",
     "minecraft": "1.17.x",
     "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
