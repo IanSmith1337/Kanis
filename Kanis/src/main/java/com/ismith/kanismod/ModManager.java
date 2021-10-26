@@ -25,6 +25,6 @@ public class ModManager implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Arf! Woof! Arf! Starting up!");
-		Registry.register(Registry.ITEM, new Identifier("Kanis", "Kanis Armor"), Kanis_Armor);
+		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_armor"), Kanis_Armor);
 	}
 }
