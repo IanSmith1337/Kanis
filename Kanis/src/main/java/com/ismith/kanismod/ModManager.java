@@ -16,7 +16,7 @@ public class ModManager implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LogManager.getLogger("kanis");
 
-	public static final Item Kanis_Armor = new Item(new FabricItemSettings().group(ItemGroup.MISC));
+	public static final Item Kanis_Armor = new KanisArmor(new FabricItemSettings().group(ItemGroup.MISC));
 
 	@Override
 	public void onInitialize() {
