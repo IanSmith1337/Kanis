@@ -1,7 +1,11 @@
 package com.ismith.kanismod;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder ;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -10,13 +14,18 @@ import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ModManager implements ModInitializer {
+public class KanisModManager implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LogManager.getLogger("kanis");
-
+    public static final EntityType<KanisEntity> KANIS = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("Kanis", "kanis"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, KanisEntity::new).dimensions(EntityDimensions.fixed(1.275f, 0.9f)).build()
+		);
 	public static final Item Kanis_Armor = new KanisArmor(new FabricItemSettings().group(ItemGroup.MISC));
+	public static final Item Kanis_Weapon = new KanisWeapon(new FabricItemSettings().group(ItemGroup.MISC));
 
 	@Override
 	public void onInitialize() {
@@ -26,5 +35,6 @@ public class ModManager implements ModInitializer {
 
 		LOGGER.info("Arf! Woof! Arf! Starting up!");
 		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_armor"), Kanis_Armor);
+		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_weapon"), Kanis_Weapon);
 	}
 }
