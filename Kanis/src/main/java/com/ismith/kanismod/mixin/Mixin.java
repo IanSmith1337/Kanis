@@ -22,7 +22,7 @@ public class Mixin {
 			KanisEntity e = new KanisEntity(KanisModManager.KANIS, world);
 			e.setTamed(true);
 			e.setOwner(p);
-			currentEntity.discard();
+			e.setPosition(currentEntity.getPos());
 			world.spawnEntity(e);
 		}
 	}

@@ -61,6 +61,12 @@ public class KanisEntity extends WolfEntity implements Saddleable {
 		super.onTrackedDataSet(data);
 	}
 
+    protected void initDataTracker() {
+		super.initDataTracker();
+		this.dataTracker.startTracking(SADDLED, false);
+		this.dataTracker.startTracking(BOOST_TIME, 0);
+	}
+
     public void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
 		this.saddledComponent.writeNbt(nbt);
