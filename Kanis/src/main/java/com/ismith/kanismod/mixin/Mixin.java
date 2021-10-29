@@ -20,9 +20,11 @@ public class Mixin {
 		World world = currentEntity.world;
 		if (currentEntity.isTamed() && !world.isClient) {
 			KanisEntity e = new KanisEntity(KanisModManager.KANIS, world);
+			e.setUuid(currentEntity.getUuid());
 			e.setTamed(true);
 			e.setOwner(p);
 			e.setPosition(currentEntity.getPos());
+			currentEntity.kill();
 			world.spawnEntity(e);
 		}
 	}
