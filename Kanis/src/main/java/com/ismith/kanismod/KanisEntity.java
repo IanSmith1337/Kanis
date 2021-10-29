@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Saddleable;
 import net.minecraft.entity.SaddledComponent;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -37,6 +38,10 @@ public class KanisEntity extends WolfEntity implements Saddleable {
 	public Entity getPrimaryPassenger() {
 		return this.getFirstPassenger();
 	}
+
+    public static DefaultAttributeContainer.Builder createKanisAttributes() {
+        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE, 200).add(EntityAttributes.GENERIC_MAX_HEALTH, 50).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK);
+    }
 
 	public boolean canBeControlledByRider() {
 		Entity entity = this.getPrimaryPassenger();

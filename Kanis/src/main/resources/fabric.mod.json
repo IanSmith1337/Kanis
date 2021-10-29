@@ -18,7 +18,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.ismith.kanismod.ModManager"
+      "com.ismith.kanismod.KanisModManager"
     ]
   },
   "mixins": [

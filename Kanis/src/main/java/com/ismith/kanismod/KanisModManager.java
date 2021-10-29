@@ -2,6 +2,7 @@ package com.ismith.kanismod;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder ;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.SpawnGroup;
@@ -21,7 +22,7 @@ public class KanisModManager implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger("kanis");
     public static final EntityType<KanisEntity> KANIS = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier("Kanis", "kanis"),
+            new Identifier("kanis", "kanisentity"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, KanisEntity::new).dimensions(EntityDimensions.fixed(1.275f, 0.9f)).build()
 		);
 	public static final Item Kanis_Armor = new KanisArmor(new FabricItemSettings().group(ItemGroup.MISC));
@@ -36,5 +37,6 @@ public class KanisModManager implements ModInitializer {
 		LOGGER.info("Arf! Woof! Arf! Starting up!");
 		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_armor"), Kanis_Armor);
 		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_weapon"), Kanis_Weapon);
+		FabricDefaultAttributeRegistry.register(KANIS, KanisEntity.createKanisAttributes());
 	}
 }

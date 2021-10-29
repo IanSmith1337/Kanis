@@ -22,8 +22,6 @@ public class Mixin {
 			KanisEntity e = new KanisEntity(KanisModManager.KANIS, world);
 			e.setTamed(true);
 			e.setOwner(p);
-			e.setSitting(true);
-			e.setHealth(50);
 			currentEntity.discard();
 			world.spawnEntity(e);
 		}
