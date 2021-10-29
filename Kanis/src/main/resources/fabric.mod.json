@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "com.ismith.kanismod.KanisModManager"
+    ], 
+    "client": [
+      "com.ismith.kanismod.KanisClient"
     ]
   },
   "mixins": [

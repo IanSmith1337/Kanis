@@ -1,15 +1,13 @@
 package com.ismith.kanismod;
 
-import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 
-public class KanisEntityRenderer<T extends Entity> extends EntityRenderer<KanisEntity> {
+public class KanisEntityRenderer extends MobEntityRenderer<KanisEntity, KanisEntityModel> {
 
     public KanisEntityRenderer(EntityRendererFactory.Context context) {
-        super(context);
+        super(context, new KanisEntityModel(context.getPart(KanisClient.KANIS_MODEL)), 0.5f);
     }
 
     @Override
