@@ -15,6 +15,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import com.ismith.kanismod.mixin.KanisTreat;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,6 +31,7 @@ public class KanisModManager implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, KanisEntity::new).dimensions(EntityDimensions.fixed(1.275f, 0.9f)).build()
 		);
 	public static final Item Kanis_Armor = new KanisArmor(new FabricItemSettings().group(ItemGroup.MISC));
+	public static final Item Kanis_Treat = new KanisTreat(new FabricItemSettings().group(ItemGroup.MISC));
 	public static final Item Kanis_Weapon = (Item)(new KanisWeapon(new FabricItemSettings().maxDamage(3000), KanisModManager.KANIS, 1));
 
 	@Override
@@ -39,14 +42,16 @@ public class KanisModManager implements ModInitializer {
 
 		LOGGER.info("Arf! Woof! Arf! Starting up!");
 		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_armor"), Kanis_Armor);
+		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_treat"), Kanis_Treat);
 		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_weapon"), Kanis_Weapon);
 		FabricDefaultAttributeRegistry.register(KANIS, KanisEntity.createKanisAttributes());
 
-		WolfTameCallback.EVENT.register((PlayerEntity player, WolfEntity wolf) -> {
+		WolfToKanisCallback.EVENT.register((PlayerEntity player, WolfEntity wolf) -> {
 			KanisEntity e = KanisModManager.KANIS.create(wolf.world);
 			e.setTamed(true);
 			e.setOwner(player);
 			e.setPosition(wolf.getPos());
+			e.setSitting(true);
 			e.world.spawnEntity(e);
 			wolf.discard();
 			return ActionResult.PASS;

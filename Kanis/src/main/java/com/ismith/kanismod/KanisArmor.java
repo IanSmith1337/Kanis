@@ -15,7 +15,7 @@ public class KanisArmor extends Item {
     }
 
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-		if (entity instanceof Saddleable && entity.isAlive()) {
+		if (entity instanceof Saddleable && entity.isAlive() && entity instanceof KanisEntity) {
 			Saddleable saddleable = (Saddleable)entity;
 			if (!saddleable.isSaddled() && saddleable.canBeSaddled()) {
 				if (!user.world.isClient) {
