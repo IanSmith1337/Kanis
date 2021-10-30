@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemSteerable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Saddleable;
 import net.minecraft.entity.SaddledComponent;
@@ -15,7 +16,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -24,13 +24,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class KanisEntity extends WolfEntity implements Saddleable {
+public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable {
     private static final TrackedData<Boolean> SADDLED;
     private static final TrackedData<Integer> BOOST_TIME;
     private final SaddledComponent saddledComponent;
 
     public KanisEntity(EntityType<? extends WolfEntity> entityType, World world) {
         super(entityType, world);
+		this.stepHeight = 1.0F;
         this.saddledComponent = new SaddledComponent(this.dataTracker, BOOST_TIME, SADDLED);
     }
 
@@ -40,7 +41,7 @@ public class KanisEntity extends WolfEntity implements Saddleable {
 	}
 
     public static DefaultAttributeContainer.Builder createKanisAttributes() {
-        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE, 200).add(EntityAttributes.GENERIC_MAX_HEALTH, 50).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK);
+        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32).add(EntityAttributes.GENERIC_MAX_HEALTH, 50).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK);
     }
 
 	public boolean canBeControlledByRider() {
@@ -80,8 +81,8 @@ public class KanisEntity extends WolfEntity implements Saddleable {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         super.interactMob(player, hand);
         ItemStack itemStack = player.getStackInHand(hand);
-        boolean bl = !itemStack.isOf(Items.BONE) && this.isTamed() && !this.hasAngerTime();
-		if (!bl && this.isSaddled() && !this.hasPassengers() && !player.shouldCancelInteraction()) {
+        boolean interaction = itemStack.isOf(KanisModManager.Kanis_Weapon) && this.isTamed() && !this.hasAngerTime();
+		if (interaction && this.isSaddled() && !this.hasPassengers() && !player.shouldCancelInteraction()) {
 			if (!this.world.isClient) {
 				player.startRiding(this);
 			}
@@ -114,7 +115,7 @@ public class KanisEntity extends WolfEntity implements Saddleable {
 
 
     public float getSaddledSpeed() {
-		return (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * 0.4F;
+		return (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * 0.7F;
 	}
 
     @Override
@@ -137,5 +138,10 @@ public class KanisEntity extends WolfEntity implements Saddleable {
     static {
 		SADDLED = DataTracker.registerData(KanisEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 		BOOST_TIME = DataTracker.registerData(KanisEntity.class, TrackedDataHandlerRegistry.INTEGER);
+	}
+
+	@Override
+	public boolean consumeOnAStickItem() {
+		return this.saddledComponent.boost(this.getRandom());
 	}
 }

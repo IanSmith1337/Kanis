@@ -29,7 +29,7 @@ public class KanisModManager implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, KanisEntity::new).dimensions(EntityDimensions.fixed(1.275f, 0.9f)).build()
 		);
 	public static final Item Kanis_Armor = new KanisArmor(new FabricItemSettings().group(ItemGroup.MISC));
-	public static final Item Kanis_Weapon = new KanisWeapon(new FabricItemSettings().group(ItemGroup.MISC));
+	public static final Item Kanis_Weapon = (Item)(new KanisWeapon(new FabricItemSettings().maxDamage(3000), KanisModManager.KANIS, 1));
 
 	@Override
 	public void onInitialize() {
