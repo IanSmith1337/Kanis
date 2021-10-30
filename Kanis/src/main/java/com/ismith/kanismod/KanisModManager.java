@@ -6,9 +6,12 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.passive.WolfEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -38,5 +41,15 @@ public class KanisModManager implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_armor"), Kanis_Armor);
 		Registry.register(Registry.ITEM, new Identifier("kanis", "kanis_weapon"), Kanis_Weapon);
 		FabricDefaultAttributeRegistry.register(KANIS, KanisEntity.createKanisAttributes());
+
+		WolfTameCallback.EVENT.register((PlayerEntity player, WolfEntity wolf) -> {
+			KanisEntity e = KanisModManager.KANIS.create(wolf.world);
+			e.setTamed(true);
+			e.setOwner(player);
+			e.setPosition(wolf.getPos());
+			e.world.spawnEntity(e);
+			wolf.kill();
+			return ActionResult.PASS;
+		});
 	}
 }

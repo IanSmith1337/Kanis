@@ -4,7 +4,7 @@
   "package": "com.ismith.kanismod.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "Mixin"
+    "WolfTameMixin"
   ],
   "client": [],
   "server": [],

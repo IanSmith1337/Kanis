@@ -80,7 +80,7 @@ public class KanisEntity extends WolfEntity implements Saddleable {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         super.interactMob(player, hand);
         ItemStack itemStack = player.getStackInHand(hand);
-        boolean bl = itemStack.isOf(Items.BONE) && !this.isTamed() && !this.hasAngerTime();
+        boolean bl = !itemStack.isOf(Items.BONE) && this.isTamed() && !this.hasAngerTime();
 		if (!bl && this.isSaddled() && !this.hasPassengers() && !player.shouldCancelInteraction()) {
 			if (!this.world.isClient) {
 				player.startRiding(this);
