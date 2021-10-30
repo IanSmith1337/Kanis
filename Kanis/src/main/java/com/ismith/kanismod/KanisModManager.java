@@ -48,7 +48,7 @@ public class KanisModManager implements ModInitializer {
 			e.setOwner(player);
 			e.setPosition(wolf.getPos());
 			e.world.spawnEntity(e);
-			wolf.kill();
+			wolf.discard();
 			return ActionResult.PASS;
 		});
 	}
