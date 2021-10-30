@@ -1,4 +1,4 @@
-package com.ismith.kanismod.mixin;
+package com.ismith.kanismod;
 
 import net.minecraft.item.Item;
 

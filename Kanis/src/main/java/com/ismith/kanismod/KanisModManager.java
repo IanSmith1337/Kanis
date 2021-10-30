@@ -15,8 +15,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import com.ismith.kanismod.mixin.KanisTreat;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,13 +45,15 @@ public class KanisModManager implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(KANIS, KanisEntity.createKanisAttributes());
 
 		WolfToKanisCallback.EVENT.register((PlayerEntity player, WolfEntity wolf) -> {
-			KanisEntity e = KanisModManager.KANIS.create(wolf.world);
-			e.setTamed(true);
-			e.setOwner(player);
-			e.setPosition(wolf.getPos());
-			e.setSitting(true);
-			e.world.spawnEntity(e);
-			wolf.discard();
+			if(!(wolf instanceof KanisEntity)) {
+				KanisEntity e = KanisModManager.KANIS.create(wolf.world);
+				e.setTamed(true);
+				e.setOwner(player);
+				e.setPosition(wolf.getPos());
+				e.setSitting(true);
+				e.world.spawnEntity(e);
+				wolf.discard();
+			}
 			return ActionResult.PASS;
 		});
 	}

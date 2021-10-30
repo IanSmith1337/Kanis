@@ -110,7 +110,7 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
 		if (sound != null) {
 			this.world.playSoundFromEntity((PlayerEntity)null, this, SoundEvents.ENTITY_HORSE_SADDLE, sound, 0.5F, 1.0F);
 		}
-
+		System.out.println("Saddled Successfully.");
     }
 
 

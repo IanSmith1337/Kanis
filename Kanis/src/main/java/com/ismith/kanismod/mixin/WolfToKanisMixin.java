@@ -1,6 +1,6 @@
 package com.ismith.kanismod.mixin;
 
-import com.ismith.kanismod.KanisArmor;
+import com.ismith.kanismod.KanisTreat;
 import com.ismith.kanismod.WolfToKanisCallback;
 
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,10 +16,12 @@ import net.minecraft.util.Hand;
 
 @org.spongepowered.asm.mixin.Mixin(WolfEntity.class)
 public class WolfToKanisMixin {
-	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/WolfEntity;isTamed()V"), method = "interactMob", cancellable = true)
-	private void transform(final PlayerEntity p, final Hand h, ItemStack itemStack, Item item, CallbackInfoReturnable<Object> returnable) {
+	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/WolfEntity;isTamed()Z", ordinal = 2), method = "interactMob", cancellable = true)
+	private void transform(final PlayerEntity player, final Hand hand, CallbackInfoReturnable<Boolean> returnable) {
+		ItemStack itemStack = player.getStackInHand(hand);
+		Item item = itemStack.getItem();
 		if(item instanceof KanisTreat) {
-			ActionResult result = WolfToKanisCallback.EVENT.invoker().interact(p, (WolfEntity) (Object) this);
+			ActionResult result = WolfToKanisCallback.EVENT.invoker().interact(player, (WolfEntity) (Object) this);
 	
 			if(result == ActionResult.FAIL) {
 				returnable.cancel();
