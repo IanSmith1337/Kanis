@@ -127,7 +127,7 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
         return super.updatePassengerForDismount(passenger);
     }
 
-    public void travel(KanisEntity kanisEntity, SaddledComponent saddledComponent, Vec3d movementInput) {
+    public void travel(Vec3d movementInput) {
 		this.travel(this, this.saddledComponent, movementInput);
 	}
     
@@ -143,5 +143,13 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
 	@Override
 	public boolean consumeOnAStickItem() {
 		return this.saddledComponent.boost(this.getRandom());
+	}
+
+	@Override
+	protected void dropInventory() {
+		super.dropInventory();
+		if (this.isSaddled()) {
+			this.dropItem(KanisModManager.Kanis_Armor);
+		}
 	}
 }
