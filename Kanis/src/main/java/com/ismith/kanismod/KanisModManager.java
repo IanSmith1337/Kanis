@@ -45,7 +45,7 @@ public class KanisModManager implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(KANIS, KanisEntity.createKanisAttributes());
 
 		WolfToKanisCallback.EVENT.register((PlayerEntity player, WolfEntity wolf) -> {
-			if(!(wolf instanceof KanisEntity)) {
+			if(!(wolf instanceof KanisEntity) && wolf.isTamed()) {
 				KanisEntity e = KanisModManager.KANIS.create(wolf.world);
 				e.setTamed(true);
 				e.setOwner(player);

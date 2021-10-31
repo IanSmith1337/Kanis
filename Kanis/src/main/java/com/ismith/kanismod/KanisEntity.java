@@ -101,7 +101,7 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
 
     @Override
     public boolean canBeSaddled() {
-        return this.isAlive() && !this.isBaby();
+        return this.isAlive();
     }
 
     @Override
@@ -115,7 +115,7 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
 
 
     public float getSaddledSpeed() {
-		return (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * 0.7F;
+		return (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * 0.4F;
 	}
 
     @Override
@@ -128,7 +128,29 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
     }
 
     public void travel(Vec3d movementInput) {
-		this.travel(this, this.saddledComponent, movementInput);
+		if (this.hasPassengers() && this.canBeControlledByRider() && this.isSaddled()) {
+			LivingEntity livingEntity = (LivingEntity)this.getPrimaryPassenger();
+			this.setYaw(livingEntity.getYaw());
+			this.prevYaw = this.getYaw();
+			this.setPitch(livingEntity.getPitch() * 0.5F);
+			this.setRotation(this.getYaw(), this.getPitch());
+			this.bodyYaw = this.getYaw();
+			this.headYaw = this.bodyYaw;
+			float f = livingEntity.sidewaysSpeed * 0.5F;
+			float g = livingEntity.forwardSpeed;
+
+			if (g <= 0.0F) {
+				g *= 0.25F;
+			}
+
+			this.flyingSpeed = this.getMovementSpeed() * 0.1F;
+			if (this.isLogicalSideForUpdatingMovement()) {
+				this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+				super.travel(new Vec3d((double)f, movementInput.y, (double)g));
+			} else if (livingEntity instanceof PlayerEntity) {
+				this.setVelocity(Vec3d.ZERO);
+			}
+		}
 	}
     
     public void setMovementInput(Vec3d movementInput) {
