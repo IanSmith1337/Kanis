@@ -41,7 +41,7 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
 	}
 
     public static DefaultAttributeContainer.Builder createKanisAttributes() {
-        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32).add(EntityAttributes.GENERIC_MAX_HEALTH, 50).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK);
+        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32).add(EntityAttributes.GENERIC_MAX_HEALTH, 50).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.15D);
     }
 
 	public boolean canBeControlledByRider() {
@@ -82,6 +82,10 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
         super.interactMob(player, hand);
         ItemStack itemStack = player.getStackInHand(hand);
         boolean interaction = itemStack.isOf(KanisModManager.Kanis_Weapon) && this.isTamed() && !this.hasAngerTime();
+		System.out.println(interaction);
+		System.out.println(this.isSaddled());
+		System.out.println(!this.hasPassengers());
+		System.out.println(!player.shouldCancelInteraction());
 		if (interaction && this.isSaddled() && !this.hasPassengers() && !player.shouldCancelInteraction()) {
 			if (!this.world.isClient) {
 				player.startRiding(this);
@@ -89,11 +93,11 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
 
 			return ActionResult.success(this.world.isClient);
 		} else {
-			ActionResult actionResult = super.interactMob(player, hand);
-			if (!actionResult.isAccepted()) {
-				itemStack = player.getStackInHand(hand);
+			System.out.println(itemStack.isOf(KanisModManager.Kanis_Armor));
+			if(itemStack.isOf(KanisModManager.Kanis_Armor)) {
 				return itemStack.isOf(KanisModManager.Kanis_Armor) ? itemStack.useOnEntity(player, this, hand) : ActionResult.PASS;
 			} else {
+				ActionResult actionResult = super.interactMob(player, hand);
 				return actionResult;
 			}
 		}
@@ -115,7 +119,7 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
 
 
     public float getSaddledSpeed() {
-		return (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * 0.4F;
+		return (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * 0.20F;
 	}
 
     @Override
@@ -150,6 +154,8 @@ public class KanisEntity extends WolfEntity implements ItemSteerable, Saddleable
 			} else if (livingEntity instanceof PlayerEntity) {
 				this.setVelocity(Vec3d.ZERO);
 			}
+		} else {
+			super.travel(movementInput);
 		}
 	}
     

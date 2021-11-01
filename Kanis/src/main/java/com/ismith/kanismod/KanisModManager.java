@@ -30,7 +30,7 @@ public class KanisModManager implements ModInitializer {
 		);
 	public static final Item Kanis_Armor = new KanisArmor(new FabricItemSettings().group(ItemGroup.MISC));
 	public static final Item Kanis_Treat = new KanisTreat(new FabricItemSettings().group(ItemGroup.MISC));
-	public static final Item Kanis_Weapon = (Item)(new KanisWeapon(new FabricItemSettings().maxDamage(3000), KanisModManager.KANIS, 1));
+	public static final Item Kanis_Weapon = (Item)(new KanisWeapon(new FabricItemSettings().maxDamage(3000).group(ItemGroup.MISC), KanisModManager.KANIS, 1));
 
 	@Override
 	public void onInitialize() {
@@ -50,7 +50,6 @@ public class KanisModManager implements ModInitializer {
 				e.setTamed(true);
 				e.setOwner(player);
 				e.setPosition(wolf.getPos());
-				e.setSitting(true);
 				e.world.spawnEntity(e);
 				wolf.discard();
 			}

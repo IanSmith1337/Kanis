@@ -15,8 +15,10 @@ public class KanisArmor extends Item {
     }
 
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+		System.out.println("Attempting to use on entity.");
 		if (entity instanceof Saddleable && entity.isAlive() && entity instanceof KanisEntity) {
 			Saddleable saddleable = (Saddleable)entity;
+			System.out.println(!saddleable.isSaddled() && saddleable.canBeSaddled());
 			if (!saddleable.isSaddled() && saddleable.canBeSaddled()) {
 				if (!user.world.isClient) {
 					saddleable.saddle(SoundCategory.NEUTRAL);
