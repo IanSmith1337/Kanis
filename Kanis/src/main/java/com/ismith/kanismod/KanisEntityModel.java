@@ -26,15 +26,15 @@ public class KanisEntityModel extends EntityModel<KanisEntity> {
 		ModelData md = new ModelData();
 		ModelPartData mpd = md.getRoot();
 		mpd.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -0.5F, -3.0F, 1.0F, 1.0F, 6.0F, new Dilation(1.35f)), createModelTransform(0.0F, 18.9F, -0.5F, 0, 0, 0));
-		mpd.addChild("rf_leg", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -1.5F, -0.5F, 1.0F, 3.0F, 1.0F, new Dilation(0.15F)), createModelTransform(-1.25F, 3.45F, -3.25F, 0, 0, 0));
-		mpd.addChild("rb_leg", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -1.5F, -0.5F, 1.0F, 3.0F, 1.0F, new Dilation(0.15F)), createModelTransform(-1.25F, 3.45F, 3.0F, 0, 0, 0));
-		mpd.addChild("lb_leg", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -1.5F, -0.5F, 1.0F, 3.0F, 1.0F, new Dilation(0.15F)), createModelTransform(1.25F, 3.45F, 3.0F, 0, 0, 0));
-		mpd.addChild("lf_leg", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -1.5F, -0.5F, 1.0F, 3.0F, 1.0F, new Dilation(0.15F)), createModelTransform(1.25F, 3.45F, -3.25F, 0, 0, 0));
-		mpd.addChild("tail", ModelPartBuilder.create().uv(0, 0).cuboid(-0.515F, -9.4062F, 1.0039F, 1.0F, 4.0F, 1.0F, new Dilation(0.05F)), createModelTransform(0.015F, 1.5095F, -7.405F, 0, 0, 0));
-		mpd.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0376F, -0.3486F, -0.521F, 2.0F, 2.0F, 2.0F, new Dilation(0.35F)), createModelTransform(0.0376F, -2.0514F, -5.979F, 0, 0, 0));
-		mpd.addChild("snout", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5376F, 0.6514F, -2.271F, 1.0F, 1.0F, 2.0F, new Dilation(0.175F)), createModelTransform(0.0376F, -2.0514F, -5.979F, 0, 0, 0));
-		mpd.addChild("earL", ModelPartBuilder.create().uv(0, 0).cuboid(-1.4762F, -4.2631F, -5.2371F, 2.0F, 3.0F, 2.0F, new Dilation(-0.65F)), createModelTransform(-0.0226F, 2.5053F, 4.0889F, -0.1745F, 0.0F, -0.0873F));
-		mpd.addChild("earR", ModelPartBuilder.create().uv(0, 0).cuboid(-0.4047F, -4.282F, -5.2404F, 2.0F, 3.0F, 2.0F, new Dilation(-0.65F)), createModelTransform(-0.0226F, 2.5053F, 4.0889F, -0.1745F, 0.0F, 0.0873F));
+		mpd.getChild("body").addChild("rf_leg", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -1.5F, -0.5F, 1.0F, 3.0F, 1.0F, new Dilation(0.15F)), createModelTransform(-1.25F, 3.45F, -3.25F, 0, 0, 0));
+		mpd.getChild("body").addChild("rb_leg", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -1.5F, -0.5F, 1.0F, 3.0F, 1.0F, new Dilation(0.15F)), createModelTransform(-1.25F, 3.45F, 3.0F, 0, 0, 0));
+		mpd.getChild("body").addChild("lb_leg", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -1.5F, -0.5F, 1.0F, 3.0F, 1.0F, new Dilation(0.15F)), createModelTransform(1.25F, 3.45F, 3.0F, 0, 0, 0));
+		mpd.getChild("body").addChild("lf_leg", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -1.5F, -0.5F, 1.0F, 3.0F, 1.0F, new Dilation(0.15F)), createModelTransform(1.25F, 3.45F, -3.25F, 0, 0, 0));
+		mpd.getChild("body").addChild("tail", ModelPartBuilder.create().uv(0, 0).cuboid(-0.515F, -9.4062F, 1.0039F, 1.0F, 4.0F, 1.0F, new Dilation(0.05F)), createModelTransform(0.015F, 1.5095F, -7.405F, 0, 0, 0));
+		mpd.getChild("body").addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0376F, -0.3486F, -0.521F, 2.0F, 2.0F, 2.0F, new Dilation(0.35F)), createModelTransform(0.0376F, -2.0514F, -5.979F, 0, 0, 0));
+		mpd.getChild("head").addChild("snout", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5376F, 0.6514F, -2.271F, 1.0F, 1.0F, 2.0F, new Dilation(0.175F)), createModelTransform(0.0376F, -2.0514F, -5.979F, 0, 0, 0));
+		mpd.getChild("head").addChild("earL", ModelPartBuilder.create().uv(0, 0).cuboid(-1.4762F, -4.2631F, -5.2371F, 2.0F, 3.0F, 2.0F, new Dilation(-0.65F)), createModelTransform(-0.0226F, 2.5053F, 4.0889F, -0.1745F, 0.0F, -0.0873F));
+		mpd.getChild("head").addChild("earR", ModelPartBuilder.create().uv(0, 0).cuboid(-0.4047F, -4.282F, -5.2404F, 2.0F, 3.0F, 2.0F, new Dilation(-0.65F)), createModelTransform(-0.0226F, 2.5053F, 4.0889F, -0.1745F, 0.0F, 0.0873F));
 		return TexturedModelData.of(md, 16, 16);
 	}
 

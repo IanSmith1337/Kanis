@@ -12,7 +12,7 @@ public class KanisEntityRenderer extends MobEntityRenderer<KanisEntity, KanisEnt
 
     @Override
     public Identifier getTexture(KanisEntity entity) {
-        return new Identifier("kanisentity", "src/main/resources/assets/textures/entities/kanis/kanisentity.png");
+        return new Identifier("kanisentity", "textures/entities/kanis/kanisentity.png");
     }
     
 }
