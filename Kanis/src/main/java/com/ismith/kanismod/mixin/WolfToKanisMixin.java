@@ -22,7 +22,6 @@ public class WolfToKanisMixin {
 		Item item = itemStack.getItem();
 		if(item instanceof KanisTreat) {
 			ActionResult result = WolfToKanisCallback.EVENT.invoker().interact(player, (WolfEntity) (Object) this);
-	
 			if(result == ActionResult.FAIL) {
 				returnable.cancel();
 			}
