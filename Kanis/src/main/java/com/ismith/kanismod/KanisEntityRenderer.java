@@ -15,4 +15,8 @@ public class KanisEntityRenderer extends MobEntityRenderer<KanisEntity, KanisEnt
         return new Identifier("kanis", "textures/entities/kanis/kanisentity.png");
     }
     
+    @Override
+    protected float getAnimationProgress(KanisEntity entity, float f) {
+		return entity.getTailAngle();
+	}
 }
