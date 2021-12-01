@@ -1,4 +1,4 @@
-# Kanis, the minecraft palamute/palico mod.
+# Kanis, the minecraft palamute mod.
 
-## WIP
+## Currently only supporting 1.17
 
