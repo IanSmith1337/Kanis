@@ -43,7 +43,7 @@ public class KanisEntityModel extends EntityModel<KanisEntity> {
 		ModelPartData lf_leg = body.addChild(EntityModelPartNames.LEFT_FRONT_LEG, ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, 0.85F, -0.95F, 2.0F, 7.0F, 2.0F, new Dilation(0.15F)), createModelTransform(2.525F, 2.225F, -5.575F, 0, 0, 0));
 		ModelPartData lh_leg = body.addChild(EntityModelPartNames.LEFT_HIND_LEG, ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, 0.85F, -0.825F, 2.0F, 7.0F, 2.0F, new Dilation(0.15F)), createModelTransform(2.525F, 2.225F, 5.425F, 0, 0, 0));
 		ModelPartData rh_leg = body.addChild(EntityModelPartNames.RIGHT_HIND_LEG, ModelPartBuilder.create().uv(0, 0).cuboid(-1.1F, 0.85F, -0.825F, 2.0F, 7.0F, 2.0F, new Dilation(0.15F)), createModelTransform(-2.475F, 2.575F, 5.6F, 0, 0, 0));
-		ModelPartData tail = body.addChild(EntityModelPartNames.TAIL, ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -4.1127F, -0.8543F, 2.0F, 7.0F, 2.0F, new Dilation(0.01F)), createModelTransform(0.025F, -0.1623F, 6.5293F, -1.0472F, 0.0F, 0.0F));
+		ModelPartData tail = body.addChild(EntityModelPartNames.TAIL, ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -4.1127F, -0.8543F, 2.0F, 7.0F, 2.0F, new Dilation(0.01F)), createModelTransform(-0.05F, -3.8873F, 6.6043F, -0.959931F, 0.0F, 0.0F));
 		ModelPartData head = body.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-3.0F, -3.5F, -5.5F, 6.0F, 6.0F, 5.0F, new Dilation(0.2F)), createModelTransform(0.075F, -0.6F, -6.75F, 0, 0, 0));
 		ModelPartData rear = head.addChild(EntityModelPartNames.RIGHT_EAR, ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -1.5F, -1.5F, 4.0F, 4.0F, 3.0F, new Dilation(-0.8F)), createModelTransform(-1.9758F, -4.8666F, -2.1089F, 0, 0, 0)).addChild(rearTip, ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -4.0F, -1.5F, 4.0F, 4.0F, 3.0F, new Dilation(-1.0F)), ModelTransform.NONE);
 		ModelPartData lear = head.addChild(EntityModelPartNames.LEFT_EAR, ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -1.5F, -1.5F, 4.0F, 4.0F, 3.0F, new Dilation(-0.8F)), createModelTransform(1.7742F, -4.8666F, -2.1089F, 0, 0, 0)).addChild(learTip, ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -4.0F, -1.5F, 4.0F, 4.0F, 3.0F, new Dilation(-1.0F)), ModelTransform.NONE);
@@ -58,14 +58,11 @@ public class KanisEntityModel extends EntityModel<KanisEntity> {
 	
 	@Override
 	public void setAngles(KanisEntity entity, float f, float g, float h, float i, float j){
-		this.head.pitch = j * 0.017453292F;
-		this.head.yaw = i * 0.017453292F;
-		this.tail.pitch = h;
 	}
 	
 	@Override
-	public void render(MatrixStack matrixStack, VertexConsumer	buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		matrixStack.translate(0d, 5f, 0d);
+	public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+		matrixStack.translate(0d, 0.85f, 0d);
 		this.getParts().forEach((modelRenderer) -> {
 			modelRenderer.render(matrixStack, buffer, packedLight, packedOverlay);
 		});
